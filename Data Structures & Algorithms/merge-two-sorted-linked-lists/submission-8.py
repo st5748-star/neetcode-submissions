@@ -1,0 +1,16 @@
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        node = dummy
+
+        while list1 and list2:              # fix 1: was "list1 and list1"
+            if list1.val < list2.val:
+                node.next = list1           # fix 2: was "node.text"
+                list1 = list1.next
+            else:
+                node.next = list2
+                list2 = list2.next
+            node = node.next
+
+        node.next = list1 or list2          # attach whatever is left
+        return dummy.next
